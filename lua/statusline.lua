@@ -48,6 +48,15 @@ function getbranch()
 	end
 end
 
+function getft()
+	ft = vim.api.nvim_buf_get_option(vim.api.nvim_get_current_buf(), 'filetype')
+	if ft ~= "" then
+		return " [" .. ft .. "] "
+	else
+		return ""
+	end
+end
+
 function M.getline()
 	local mode = vim.api.nvim_get_mode()["mode"]
 	return config[mode]["hi"]
@@ -59,9 +68,9 @@ function M.getline()
 		.. " %="
 		.. " %m"
 		.. " %r"
-		.. " %#StatusDark#"
-		.. " %y"
-		.. " %#StatusLight#"
+		.. "%#StatusDark#"
+		.. getft()
+		.. "%#StatusLight#"
 		.. " %cC"
 		.. " %l/%LL "
 end
