@@ -15,7 +15,8 @@ function getname(tab)
 	local win = vim.api.nvim_tabpage_get_win(tab)
 	local buf = vim.api.nvim_win_get_buf(win)
 	local fullname = vim.api.nvim_buf_get_name(buf)
-	return vim.api.nvim_call_function("fnamemodify", {fullname, ":t"})
+	local name = vim.fn.fnamemodify(fullname, ":.")
+	return vim.fn.pathshorten(name)
 end
 
 function M.getline()
